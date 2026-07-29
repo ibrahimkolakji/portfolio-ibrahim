@@ -1,8 +1,8 @@
-import Header from "@/components/header";
-import HeroSection from "@/components/HeroSection";
-import AboutSection from "@/components/AboutSection";
-import SkillsSection from "@/components/SkillsSection";
-
+import Header from "@/components/Layout/header";
+import HeroSection from "@/components/Sections/HeroSection";
+import AboutSection from "@/components/Sections/AboutSection";
+import SkillsSection from "@/components/Sections/SkillsSection";
+import ProjectsSection from "@/components/Sections/ProjectsSection";
 export default function Home() {
   return (
     <>
@@ -12,6 +12,7 @@ export default function Home() {
         <HeroSection />
         <AboutSection />
         <SkillsSection />
+        <ProjectsSection />
       </main>
     </>
   );

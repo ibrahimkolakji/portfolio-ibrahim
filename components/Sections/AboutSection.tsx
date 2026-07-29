@@ -45,10 +45,9 @@ export default function AboutSection() {
             }}
             className="lg:sticky lg:top-32"
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/80 px-4 py-2 text-sm font-semibold text-blue-700 backdrop-blur">
-              <span className="h-2 w-2 rounded-full bg-blue-600" />
-              {t.eyebrow}
-            </div>
+            <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#2563eb]">
+            {t.eyebrow}
+          </p>
 
             <h2 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
               {t.titleFirst}

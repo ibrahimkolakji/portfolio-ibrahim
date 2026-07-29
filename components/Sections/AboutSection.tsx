@@ -34,17 +34,8 @@ export default function AboutSection() {
       className="relative overflow-hidden bg-white px-6 py-24 sm:py-28 lg:px-8"
     >
       {/* Dezente Hintergrundelemente */}
-      <div className="pointer-events-none absolute -left-40 top-24 h-96 w-96 rounded-full bg-blue-100/60 blur-3xl" />
-      <div className="pointer-events-none absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-cyan-100/50 blur-3xl" />
-
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.025]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, #0f172a 1px, transparent 1px), linear-gradient(to bottom, #0f172a 1px, transparent 1px)",
-          backgroundSize: "56px 56px",
-        }}
-      />
+      
+      
 
       <div className="relative mx-auto max-w-7xl">
         <div className="grid gap-16 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">

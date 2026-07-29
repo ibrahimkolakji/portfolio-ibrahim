@@ -5,48 +5,10 @@ import { motion } from "motion/react";
 export default function HeroSection() {
   return (
     <section
-      id="start"
-      className="relative flex min-h-screen items-center overflow-hidden bg-slate-50 px-6 pb-20 pt-32 lg:px-8"
-    >
-      {/* Animierte Hintergrundelemente */}
-      <motion.div
-        className="pointer-events-none absolute -right-40 top-20 h-96 w-96 rounded-full bg-blue-200/50 blur-3xl"
-        animate={{
-          x: [0, -35, 0],
-          y: [0, 25, 0],
-          scale: [1, 1.08, 1],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-
-      <motion.div
-        className="pointer-events-none absolute -left-40 bottom-20 h-96 w-96 rounded-full bg-cyan-200/40 blur-3xl"
-        animate={{
-          x: [0, 30, 0],
-          y: [0, -25, 0],
-          scale: [1, 1.12, 1],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-
-      {/* Dezentes Raster im Hintergrund */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.035]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, #0f172a 1px, transparent 1px), linear-gradient(to bottom, #0f172a 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-        }}
-      />
-
+  id="start"
+  className="relative flex min-h-screen items-center overflow-hidden bg-transparent px-6 pb-20 pt-32 lg:px-8"
+>
+     
       <div className="relative mx-auto grid w-full max-w-7xl items-center gap-16 lg:grid-cols-[1.15fr_0.85fr]">
         {/* Linker Textbereich */}
         <motion.div

@@ -16,9 +16,9 @@ export default function ProjectsSection() {
   return (
     <section
       id="projekte"
-      className="relative overflow-hidden bg-slate-50 px-6 py-24 sm:py-28 lg:px-8"
-    >
-      <div className="pointer-events-none absolute right-0 top-0 h-96 w-96 rounded-full bg-blue-100/60 blur-3xl" />
+  className="relative flex min-h-screen items-center overflow-hidden bg-transparent px-6 pb-20 pt-32 lg:px-8"
+>
+      
 
       <div className="relative mx-auto max-w-7xl">
         <motion.div

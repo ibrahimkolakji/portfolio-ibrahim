@@ -2,6 +2,8 @@
 
 import { motion } from "motion/react";
 import type { Project } from "@/data/Projects";
+import { translations } from "@/data/translations";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 type ProjectCardProps = {
   project: Project;
@@ -12,6 +14,9 @@ export default function ProjectCard({
   project,
   index,
 }: ProjectCardProps) {
+  const { language } = useLanguage();
+  const t = translations[language].projects;
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 50 }}
@@ -31,16 +36,19 @@ export default function ProjectCard({
         {project.image ? (
           <img
             src={project.image}
-            alt={`Vorschau des Projekts ${project.title}`}
+            alt={`${t.projectPreview} ${project.title}`}
             className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
           />
         ) : (
           <div className="flex h-full items-center justify-center p-8 text-center text-white">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-200">
-                Projekt
+                {t.projectLabel}
               </p>
-              <p className="mt-4 text-3xl font-bold">{project.title}</p>
+
+              <p className="mt-4 text-3xl font-bold">
+                {project.title}
+              </p>
             </div>
           </div>
         )}
@@ -48,7 +56,7 @@ export default function ProjectCard({
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-transparent" />
 
         <span className="absolute left-5 top-5 rounded-full border border-white/20 bg-slate-950/40 px-4 py-2 text-xs font-semibold text-white backdrop-blur-md">
-          {project.category}
+          {project.category[language]}
         </span>
       </div>
 
@@ -58,17 +66,18 @@ export default function ProjectCard({
         </h3>
 
         <p className="mt-4 leading-7 text-slate-600">
-          {project.description}
+          {project.description[language]}
         </p>
 
         <ul className="mt-6 space-y-3">
-          {project.highlights.map((highlight) => (
+          {project.highlights.map((highlight, highlightIndex) => (
             <li
-              key={highlight}
+              key={`${project.title}-${highlightIndex}`}
               className="flex gap-3 text-sm leading-6 text-slate-600"
             >
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-600" />
-              {highlight}
+
+              <span>{highlight[language]}</span>
             </li>
           ))}
         </ul>
@@ -93,7 +102,7 @@ export default function ProjectCard({
                 rel="noopener noreferrer"
                 className="font-semibold text-blue-600 transition hover:text-blue-700"
               >
-                Live ansehen ↗
+                {t.viewLive} ↗
               </a>
             )}
 

@@ -1,14 +1,33 @@
 "use client";
 
 import { motion } from "motion/react";
+import { translations } from "@/data/translations";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 export default function HeroSection() {
+  const { language } = useLanguage();
+  const t = translations[language].hero;
+
+  const technologies = [
+    {
+      title: "React",
+      subtitle: t.technologyFrontend,
+    },
+    {
+      title: "Next.js",
+      subtitle: t.technologyWeb,
+    },
+    {
+      title: "Python",
+      subtitle: t.technologyData,
+    },
+  ];
+
   return (
     <section
-  id="start"
-  className="relative flex min-h-screen items-center overflow-hidden bg-transparent px-6 pb-20 pt-32 lg:px-8"
->
-     
+      id="start"
+      className="relative flex min-h-screen items-center overflow-hidden bg-transparent px-6 pb-20 pt-32 lg:px-8"
+    >
       <div className="relative mx-auto grid w-full max-w-7xl items-center gap-16 lg:grid-cols-[1.15fr_0.85fr]">
         {/* Linker Textbereich */}
         <motion.div
@@ -19,6 +38,7 @@ export default function HeroSection() {
             ease: [0.22, 1, 0.36, 1],
           }}
         >
+          {/* Verfügbarkeit */}
           <motion.div
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/80 px-4 py-2 text-sm font-semibold text-blue-700 shadow-sm backdrop-blur"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -41,9 +61,10 @@ export default function HeroSection() {
               }}
             />
 
-            Offen für berufliche Möglichkeiten
+            {t.availability}
           </motion.div>
 
+          {/* Tätigkeitsbereiche */}
           <motion.p
             className="mb-4 text-sm font-bold uppercase tracking-[0.25em] text-blue-600"
             initial={{ opacity: 0, y: 15 }}
@@ -53,9 +74,10 @@ export default function HeroSection() {
               delay: 0.2,
             }}
           >
-            Wirtschaftsinformatik · Web · Data · IT
+            {t.focus}
           </motion.p>
 
+          {/* Hauptüberschrift */}
           <motion.h1
             className="max-w-4xl text-5xl font-bold leading-[1.05] tracking-tight text-slate-950 sm:text-6xl lg:text-7xl"
             initial={{ opacity: 0, y: 25 }}
@@ -66,12 +88,14 @@ export default function HeroSection() {
               ease: [0.22, 1, 0.36, 1],
             }}
           >
-            Hallo, ich bin
+            {t.greeting}
+
             <span className="block bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 bg-clip-text text-transparent">
               Ibrahim Kolakji.
             </span>
           </motion.h1>
 
+          {/* Beschreibung */}
           <motion.p
             className="mt-8 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl"
             initial={{ opacity: 0, y: 20 }}
@@ -81,11 +105,10 @@ export default function HeroSection() {
               delay: 0.35,
             }}
           >
-            Wirtschaftsinformatiker mit Erfahrung in Webentwicklung,
-            Datenverarbeitung, UX und IT-Projekten. Ich entwickle
-            nutzerfreundliche und technisch zuverlässige digitale Lösungen.
+            {t.description}
           </motion.p>
 
+          {/* Buttons */}
           <motion.div
             className="mt-10 flex flex-col gap-4 sm:flex-row"
             initial={{ opacity: 0, y: 20 }}
@@ -101,7 +124,7 @@ export default function HeroSection() {
               whileHover={{ y: -3 }}
               whileTap={{ scale: 0.97 }}
             >
-              Projekte ansehen
+              {t.projectsButton}
 
               <span className="transition-transform duration-300 group-hover:translate-x-1">
                 →
@@ -109,18 +132,19 @@ export default function HeroSection() {
             </motion.a>
 
             <motion.a
-              href="/Ibrahim-Kolakji-Lebenslauf.pdf"
+              href="/CV_Kolakji_KPMG.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white/80 px-7 py-3.5 font-semibold text-slate-900 shadow-sm backdrop-blur transition-colors hover:border-blue-600 hover:text-blue-600"
               whileHover={{ y: -3 }}
               whileTap={{ scale: 0.97 }}
             >
-              Lebenslauf ansehen
+              {t.resumeButton}
               <span aria-hidden="true">↗</span>
             </motion.a>
           </motion.div>
 
+          {/* Standort und Sprachen */}
           <motion.div
             className="mt-12 flex flex-wrap gap-x-8 gap-y-3 text-sm font-medium text-slate-500"
             initial={{ opacity: 0 }}
@@ -132,12 +156,12 @@ export default function HeroSection() {
           >
             <span className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
-              Stuttgart, Deutschland
+              {t.location}
             </span>
 
             <span className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-cyan-500" />
-              Deutsch · Englisch · Arabisch
+              {t.languages}
             </span>
           </motion.div>
         </motion.div>
@@ -229,7 +253,7 @@ export default function HeroSection() {
                 <p className="text-2xl font-bold">Ibrahim Kolakji</p>
 
                 <p className="mt-2 text-blue-100">
-                  Wirtschaftsinformatiker
+                  {t.profession}
                 </p>
 
                 <div className="mx-auto mt-6 h-px w-20 bg-white/20" />
@@ -240,21 +264,9 @@ export default function HeroSection() {
               </div>
             </div>
 
+            {/* Technologien */}
             <div className="mt-6 grid grid-cols-3 gap-3 text-center">
-              {[
-                {
-                  title: "React",
-                  subtitle: "Frontend",
-                },
-                {
-                  title: "Next.js",
-                  subtitle: "Web",
-                },
-                {
-                  title: "Python",
-                  subtitle: "Data",
-                },
-              ].map((technology, index) => (
+              {technologies.map((technology, index) => (
                 <motion.div
                   key={technology.title}
                   className="rounded-2xl border border-slate-100 bg-slate-50 p-3"
@@ -286,7 +298,7 @@ export default function HeroSection() {
       {/* Scroll-Hinweis */}
       <motion.a
         href="#ueber-mich"
-        aria-label="Zum nächsten Abschnitt scrollen"
+        aria-label={t.scrollAriaLabel}
         className="absolute bottom-7 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400 lg:flex"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -295,7 +307,7 @@ export default function HeroSection() {
           delay: 1.1,
         }}
       >
-        Scroll
+        {t.scroll}
 
         <motion.span
           className="text-lg"

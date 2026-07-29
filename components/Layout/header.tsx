@@ -3,18 +3,45 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
-const navigation = [
-  { name: "Über mich", href: "#ueber-mich", id: "ueber-mich" },
-  { name: "Kenntnisse", href: "#kenntnisse", id: "kenntnisse" },
-  { name: "Projekte", href: "#projekte", id: "projekte" },
-  { name: "Erfahrung", href: "#erfahrung", id: "erfahrung" },
-  { name: "Kontakt", href: "#kontakt", id: "kontakt" },
-];
+import LanguageButton from "@/components/UI/Button";
+import { translations } from "@/data/translations";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 export default function Header() {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("start");
+
+  const navigation = [
+    {
+      name: t.navigation.about,
+      href: "#ueber-mich",
+      id: "ueber-mich",
+    },
+    {
+      name: t.navigation.skills,
+      href: "#kenntnisse",
+      id: "kenntnisse",
+    },
+    {
+      name: t.navigation.projects,
+      href: "#projekte",
+      id: "projekte",
+    },
+    {
+      name: t.navigation.experience,
+      href: "#erfahrung",
+      id: "erfahrung",
+    },
+    {
+      name: t.navigation.contact,
+      href: "#kontakt",
+      id: "kontakt",
+    },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,7 +71,7 @@ export default function Header() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [language]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -66,8 +93,14 @@ export default function Header() {
         }`}
       >
         <motion.div
-          initial={{ opacity: 0, y: -24 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{
+            opacity: 0,
+            y: -24,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
           transition={{
             duration: 0.7,
             ease: [0.22, 1, 0.36, 1],
@@ -83,7 +116,7 @@ export default function Header() {
             href="#start"
             onClick={handleNavigationClick}
             className="group flex items-center gap-3 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-            aria-label="Zur Startseite"
+            aria-label={t.navigation.home}
           >
             <motion.span
               whileHover={{
@@ -106,7 +139,7 @@ export default function Header() {
               </span>
 
               <span className="block text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-400">
-                Wirtschaftsinformatik
+                {t.hero.profession}
               </span>
             </span>
           </a>
@@ -114,14 +147,14 @@ export default function Header() {
           {/* Desktop Navigation */}
           <nav
             className="hidden items-center rounded-full border border-slate-200/80 bg-slate-50/80 p-1.5 md:flex"
-            aria-label="Hauptnavigation"
+            aria-label={t.navigation.mainNavigation}
           >
             {navigation.map((item) => {
               const isActive = activeSection === item.id;
 
               return (
                 <a
-                  key={item.name}
+                  key={item.id}
                   href={item.href}
                   className={`relative rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-300 ${
                     isActive
@@ -147,90 +180,101 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Kontaktbutton */}
-          <motion.a
-            href="#kontakt"
-            whileHover={{
-              y: -2,
-            }}
-            whileTap={{
-              scale: 0.97,
-            }}
-            className="group relative hidden overflow-hidden rounded-full bg-slate-950 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-slate-950/15 md:inline-flex"
-          >
-            <span className="absolute inset-0 translate-y-full bg-gradient-to-r from-blue-600 to-cyan-500 transition-transform duration-300 group-hover:translate-y-0" />
+          {/* Rechte Seite */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Desktop Kontaktbutton */}
+            <motion.a
+              href="#kontakt"
+              whileHover={{
+                y: -2,
+              }}
+              whileTap={{
+                scale: 0.97,
+              }}
+              className="group relative hidden overflow-hidden rounded-full bg-slate-950 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-slate-950/15 lg:inline-flex"
+            >
+              <span className="absolute inset-0 translate-y-full bg-gradient-to-r from-blue-600 to-cyan-500 transition-transform duration-300 group-hover:translate-y-0" />
 
-            <span className="relative z-10 flex items-center gap-2">
-              Kontakt
-              <span className="transition-transform duration-300 group-hover:translate-x-1">
-                →
+              <span className="relative z-10 flex items-center gap-2">
+                {t.navigation.contact}
+
+                <span className="transition-transform duration-300 group-hover:translate-x-1">
+                  →
+                </span>
               </span>
-            </span>
-          </motion.a>
+            </motion.a>
 
-          {/* Mobile Menu Button */}
-          <button
-            type="button"
-            onClick={() => setMenuOpen((current) => !current)}
-            className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white/80 text-slate-950 shadow-sm transition hover:border-blue-300 hover:bg-blue-50 md:hidden"
-            aria-label={
-              menuOpen ? "Navigation schließen" : "Navigation öffnen"
-            }
-            aria-expanded={menuOpen}
-          >
-            <span className="sr-only">
-              {menuOpen ? "Navigation schließen" : "Navigation öffnen"}
-            </span>
+            <LanguageButton />
 
-            <span className="relative block h-5 w-5">
-              <motion.span
-                className="absolute left-0 top-1 block h-0.5 w-5 rounded-full bg-current"
-                animate={
-                  menuOpen
-                    ? {
-                        y: 6,
-                        rotate: 45,
-                      }
-                    : {
-                        y: 0,
-                        rotate: 0,
-                      }
-                }
-                transition={{
-                  duration: 0.25,
-                }}
-              />
+            {/* Mobile Menu Button */}
+            <button
+              type="button"
+              onClick={() => setMenuOpen((current) => !current)}
+              className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white/80 text-slate-950 shadow-sm transition hover:border-blue-300 hover:bg-blue-50 md:hidden"
+              aria-label={
+                menuOpen
+                  ? t.navigation.closeMenu
+                  : t.navigation.openMenu
+              }
+              aria-expanded={menuOpen}
+              aria-controls="mobile-navigation"
+            >
+              <span className="sr-only">
+                {menuOpen
+                  ? t.navigation.closeMenu
+                  : t.navigation.openMenu}
+              </span>
 
-              <motion.span
-                className="absolute left-0 top-[9px] block h-0.5 w-5 rounded-full bg-current"
-                animate={{
-                  opacity: menuOpen ? 0 : 1,
-                  x: menuOpen ? 8 : 0,
-                }}
-                transition={{
-                  duration: 0.2,
-                }}
-              />
+              <span className="relative block h-5 w-5">
+                <motion.span
+                  className="absolute left-0 top-1 block h-0.5 w-5 rounded-full bg-current"
+                  animate={
+                    menuOpen
+                      ? {
+                          y: 6,
+                          rotate: 45,
+                        }
+                      : {
+                          y: 0,
+                          rotate: 0,
+                        }
+                  }
+                  transition={{
+                    duration: 0.25,
+                  }}
+                />
 
-              <motion.span
-                className="absolute bottom-1 left-0 block h-0.5 w-5 rounded-full bg-current"
-                animate={
-                  menuOpen
-                    ? {
-                        y: -6,
-                        rotate: -45,
-                      }
-                    : {
-                        y: 0,
-                        rotate: 0,
-                      }
-                }
-                transition={{
-                  duration: 0.25,
-                }}
-              />
-            </span>
-          </button>
+                <motion.span
+                  className="absolute left-0 top-[9px] block h-0.5 w-5 rounded-full bg-current"
+                  animate={{
+                    opacity: menuOpen ? 0 : 1,
+                    x: menuOpen ? 8 : 0,
+                  }}
+                  transition={{
+                    duration: 0.2,
+                  }}
+                />
+
+                <motion.span
+                  className="absolute bottom-1 left-0 block h-0.5 w-5 rounded-full bg-current"
+                  animate={
+                    menuOpen
+                      ? {
+                          y: -6,
+                          rotate: -45,
+                        }
+                      : {
+                          y: 0,
+                          rotate: 0,
+                        }
+                  }
+                  transition={{
+                    duration: 0.25,
+                  }}
+                />
+              </span>
+            </button>
+          </div>
         </motion.div>
       </header>
 
@@ -239,18 +283,25 @@ export default function Header() {
         {menuOpen && (
           <motion.div
             className="fixed inset-0 z-40 md:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
           >
             <button
               type="button"
-              aria-label="Mobiles Menü schließen"
+              aria-label={t.navigation.closeMobileMenu}
               onClick={() => setMenuOpen(false)}
               className="absolute inset-0 bg-slate-950/35 backdrop-blur-md"
             />
 
             <motion.div
+              id="mobile-navigation"
               initial={{
                 opacity: 0,
                 y: -25,
@@ -276,14 +327,14 @@ export default function Header() {
 
               <nav
                 className="relative flex flex-col gap-2"
-                aria-label="Mobile Navigation"
+                aria-label={t.navigation.mobileNavigation}
               >
                 {navigation.map((item, index) => {
                   const isActive = activeSection === item.id;
 
                   return (
                     <motion.a
-                      key={item.name}
+                      key={item.id}
                       href={item.href}
                       onClick={handleNavigationClick}
                       initial={{
@@ -308,7 +359,9 @@ export default function Header() {
 
                       <span
                         className={`transition-transform duration-300 group-hover:translate-x-1 ${
-                          isActive ? "text-blue-300" : "text-slate-400"
+                          isActive
+                            ? "text-blue-300"
+                            : "text-slate-400"
                         }`}
                       >
                         →
@@ -324,7 +377,7 @@ export default function Header() {
                   onClick={handleNavigationClick}
                   className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 px-5 py-4 font-semibold text-white shadow-lg shadow-blue-600/20"
                 >
-                  Kontakt aufnehmen
+                  {t.contact.directContact}
                   <span>→</span>
                 </a>
 

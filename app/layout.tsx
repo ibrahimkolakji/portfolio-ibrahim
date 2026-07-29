@@ -1,20 +1,11 @@
 import type { Metadata } from "next";
+import { LanguageProvider } from "@/app/context/LanguageContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Ibrahim Kolakji | Wirtschaftsinformatiker",
+  title: "Ibrahim Kolakji | Portfolio",
   description:
-    "Portfolio von Ibrahim Kolakji – Wirtschaftsinformatiker mit Erfahrung in Webentwicklung, UX, Datenverarbeitung und IT-Projekten.",
-  keywords: [
-    "Ibrahim Kolakji",
-    "Wirtschaftsinformatik",
-    "React",
-    "Next.js",
-    "Webentwicklung",
-    "IT Consulting",
-    "Data",
-    "Stuttgart",
-  ],
+    "Portfolio von Ibrahim Kolakji – Wirtschaftsinformatik, Softwareentwicklung und IT-Consulting.",
 };
 
 export default function RootLayout({
@@ -24,7 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
-      <body>{children}</body>
+      <body>
+        <LanguageProvider>{children}</LanguageProvider>
+      </body>
     </html>
   );
 }

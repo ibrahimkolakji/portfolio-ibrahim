@@ -3,8 +3,13 @@
 import { motion } from "motion/react";
 import { projects } from "@/data/Projects";
 import ProjectCard from "@/components/UI/ProjectsCard";
+import { translations } from "@/data/translations";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 export default function ProjectsSection() {
+  const { language } = useLanguage();
+  const t = translations[language].projects;
+
   const featuredProjects = projects.filter(
     (project) => project.featured,
   );
@@ -16,11 +21,9 @@ export default function ProjectsSection() {
   return (
     <section
       id="projekte"
-  className="relative flex min-h-screen items-center overflow-hidden bg-transparent px-6 pb-20 pt-32 lg:px-8"
->
-      
-
-      <div className="relative mx-auto max-w-7xl">
+      className="relative flex min-h-screen items-center overflow-hidden bg-transparent px-6 pb-20 pt-32 lg:px-8"
+    >
+      <div className="relative mx-auto w-full max-w-7xl">
         <motion.div
           className="max-w-3xl"
           initial={{ opacity: 0, y: 35 }}
@@ -32,19 +35,19 @@ export default function ProjectsSection() {
           }}
         >
           <p className="mb-4 text-sm font-bold uppercase tracking-[0.25em] text-blue-600">
-            Ausgewählte Projekte
+            {t.eyebrow}
           </p>
 
           <h2 className="text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
-            Von der Idee
+            {t.titleFirst}
+
             <span className="block text-slate-400">
-              zur funktionierenden Lösung.
+              {t.titleSecond}
             </span>
           </h2>
 
           <p className="mt-6 text-lg leading-8 text-slate-600">
-            Eine Auswahl meiner Projekte aus Webentwicklung, User
-            Experience, Datenanalyse und künstlicher Intelligenz.
+            {t.description}
           </p>
         </motion.div>
 
